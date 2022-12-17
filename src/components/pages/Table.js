@@ -5,33 +5,34 @@ import { useState } from 'react';
 
 const Table = () => {
 	const { tableId } = useParams();
-	const [min, setMin] = useState(1);
-	const [max, setMax] = useState(2);
-	const [billVal, setBillVal] = useState(0);
-	const minVal = 1;
-	const maxVal = 10;
 	const tableData = useSelector((state) => getTableById(state, tableId));
-	console.log(tableData);
+	const [billVal, setBillVal] = useState(0);
 	const [status, setStatus] = useState(tableData.status);
+	const [peopleMinVal, setPeopleMinVal] = useState(tableData.peopleAmount);
+	const [peopleMaxVal, setPeopleMaxVal] = useState(tableData.maxPeopleAmount);
 
 	const handleChangeMin = (e) => {
-		const value = Math.max(minVal, Math.min(maxVal, Number(e.target.value)));
-
-		setMin(value);
+		const max = peopleMaxVal;
+		setPeopleMinVal(e.target.value);
+		if (e.target.value > max) {
+			setPeopleMinVal(max);
+		}
 	};
-
 	const handleChangeMax = (e) => {
-		const value = Math.max(minVal, Math.min(maxVal, Number(e.target.value)));
-
-		setMax(value);
+		setPeopleMaxVal(e.target.value);
+		if (e.target.value > peopleMinVal) {
+			setPeopleMinVal(parseInt(peopleMaxVal) + 1);
+		}
 	};
-
 	const handleChangeBill = (e) => {
 		setBillVal(e.target.value);
 	};
-
 	const handleChange = (e) => {
 		setStatus(e.target.value);
+
+		if (e.target.value === 'Free' || e.target.value === 'Cleaning') {
+			setPeopleMinVal(0);
+		}
 	};
 
 	if (!tableData) return <Navigate to='/' />;
@@ -55,16 +56,20 @@ const Table = () => {
 				<h4>People: </h4>
 				<input
 					type='number'
+					min='0'
+					max='10'
 					step='1'
-					value={min}
+					value={peopleMinVal}
 					onChange={handleChangeMin}
 					className='mx-4 rounded'
 				/>
 				<span className='fs-4'>/</span>
 				<input
 					type='number'
+					min='0'
+					max='10'
 					step='1'
-					value={max}
+					value={peopleMaxVal}
 					onChange={handleChangeMax}
 					size='sm'
 					className='mx-4 w-2 rounded'
