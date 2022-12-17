@@ -19,7 +19,7 @@ function App() {
 			<Header />
 			<Routes>
 				<Route path='/' element={<TablesList />} />
-				<Route path='/table/:id' element={<Table />} />
+				<Route path='/table/:tableId' element={<Table />} />
 				<Route path='*' element={<PageNotFound />} />
 			</Routes>
 			<Footer />
