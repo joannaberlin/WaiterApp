@@ -6,7 +6,6 @@ import { Link } from 'react-router-dom';
 const TablesList = () => {
 	const tables = useSelector((state) => getAllTables(state));
 	// const dispatch = useDispatch();
-	console.log(tables);
 
 	return (
 		<>
