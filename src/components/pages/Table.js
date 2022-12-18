@@ -1,44 +1,43 @@
 import { getTableById } from '../../redux/tablesRedux';
 import { useSelector } from 'react-redux';
 import { useParams, Navigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import PeopleAmount from '../features/AmountWidget';
+import Button from '../common/Button';
+import BillAmount from '../features/BillAmount';
 
 const Table = () => {
 	const { tableId } = useParams();
 	const tableData = useSelector((state) => getTableById(state, tableId));
-	const [billVal, setBillVal] = useState(0);
-	const [status, setStatus] = useState(tableData.status);
-	const [peopleMinVal, setPeopleMinVal] = useState(tableData.peopleAmount);
-	const [peopleMaxVal, setPeopleMaxVal] = useState(tableData.maxPeopleAmount);
+	// const [billVal, setBillVal] = useState(0);
+	const [status, setStatus] = useState(null);
 
-	const handleChangeMin = (e) => {
-		const max = peopleMaxVal;
-		setPeopleMinVal(e.target.value);
-		if (e.target.value > max) {
-			setPeopleMinVal(max);
+	useEffect(() => {
+		if (tableData !== undefined) {
+			return () => {
+				setStatus(tableData.status);
+			};
 		}
-	};
-	const handleChangeMax = (e) => {
-		setPeopleMaxVal(e.target.value);
-		if (e.target.value > peopleMinVal) {
-			setPeopleMinVal(parseInt(peopleMaxVal) + 1);
-		}
-	};
-	const handleChangeBill = (e) => {
-		setBillVal(e.target.value);
-	};
+	}, [tableData]);
+
+	// const handleChangeBill = (e) => {
+	// 	setBillVal(e.target.value);
+	// };
 	const handleChange = (e) => {
 		setStatus(e.target.value);
 
 		if (e.target.value === 'Free' || e.target.value === 'Cleaning') {
-			setPeopleMinVal(0);
+			// setPeopleMinVal(0);
 		}
 	};
 
-	if (!tableData) return <Navigate to='/' />;
+	// if (!tableData.id) return <Navigate to='/' />;
+	if (tableData === undefined) {
+		return <h2>Loading...</h2>;
+	}
 	return (
 		<form>
-			<h2>Table {tableData.id}</h2>
+			<h2 className='my-4'>Table {tableData.id}</h2>
 			<div className='d-flex flex-row'>
 				<h4>Status: </h4>
 				<select
@@ -52,47 +51,14 @@ const Table = () => {
 					<option value='Cleaning'>Cleaning</option>
 				</select>
 			</div>
-			<div className='d-flex flex-row my-4'>
-				<h4>People: </h4>
-				<input
-					type='number'
-					min='0'
-					max='10'
-					step='1'
-					value={peopleMinVal}
-					onChange={handleChangeMin}
-					className='mx-4 rounded'
-				/>
-				<span className='fs-4'>/</span>
-				<input
-					type='number'
-					min='0'
-					max='10'
-					step='1'
-					value={peopleMaxVal}
-					onChange={handleChangeMax}
-					size='sm'
-					className='mx-4 w-2 rounded'
-				/>
-			</div>
-			{status === 'Busy' ? (
-				<div className='d-flex flex-row'>
-					<h4>Bill: </h4>
-					<span className='fs-4 mx-4'>$</span>
-					<input
-						type='text'
-						value={billVal}
-						className='rounded'
-						onChange={handleChangeBill}
-					/>
-				</div>
+			<PeopleAmount tableData={tableData} />
+			{/* {status === 'Busy' && tableData !== undefined ? (
+				<BillAmount status={tableData.status} />
 			) : (
 				<></>
-			)}
-
-			<button type='button' className='btn btn-primary my-4'>
-				Update
-			</button>
+			)} */}
+			<BillAmount status={status} />
+			<Button>Update</Button>
 		</form>
 	);
 };

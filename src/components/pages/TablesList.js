@@ -2,6 +2,7 @@ import { useSelector } from 'react-redux';
 // import { useDispatch } from 'react-redux';
 import { getAllTables } from '../../redux/tablesRedux';
 import { Link } from 'react-router-dom';
+import Button from '../common/Button';
 
 const TablesList = () => {
 	const tables = useSelector((state) => getAllTables(state));
@@ -26,9 +27,7 @@ const TablesList = () => {
 							</h5>
 						</div>
 						<Link key={table.id} to={'/table/' + table.id}>
-							<button type='button' className='btn btn-primary'>
-								Show more
-							</button>
+							<Button>Show more</Button>
 						</Link>
 					</li>
 				))}
