@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import Button from '../common/Button';
 import Title from '../common/Title';
-import { updateTable, updateTablesRequest } from '../../redux/tablesRedux';
+import { updateTablesRequest } from '../../redux/tablesRedux';
 
 const TableForm = ({ tableData }) => {
 	const [status, setStatus] = useState('');
@@ -10,18 +11,17 @@ const TableForm = ({ tableData }) => {
 	const [maxPeopleAmount, setPeopleMaxVal] = useState(
 		tableData.maxPeopleAmount
 	);
-	const [bill, setBillVal] = useState(0);
-
+	const [bill, setBillVal] = useState(tableData.bill);
 	const dispatch = useDispatch();
-
+	const navigate = useNavigate();
 	const id = tableData.id;
 
 	const handleChangeBill = (e) => {
 		setBillVal(e.target.value);
 	};
-
 	const handleChange = (e) => {
 		setStatus(e.target.value);
+		setBillVal(0);
 	};
 	const handleChangeMin = (e) => {
 		const max = maxPeopleAmount;
@@ -31,7 +31,6 @@ const TableForm = ({ tableData }) => {
 			setPeopleMinVal(max);
 		}
 	};
-
 	const handleChangeMax = (e) => {
 		parseInt(e.target.value);
 		setPeopleMaxVal(e.target.value);
@@ -39,18 +38,8 @@ const TableForm = ({ tableData }) => {
 			setPeopleMinVal(parseInt(maxPeopleAmount) + 1);
 		}
 	};
-
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		// dispatch(
-		// 	updateTable(tableData.id, {
-		// 		id,
-		// 		status,
-		// 		peopleAmount,
-		// 		maxPeopleAmount,
-		// 		bill,
-		// 	})
-		// );
 		dispatch(
 			updateTablesRequest(tableData.id, {
 				id,
@@ -60,6 +49,7 @@ const TableForm = ({ tableData }) => {
 				bill,
 			})
 		);
+		navigate('/');
 	};
 
 	useEffect(() => {
