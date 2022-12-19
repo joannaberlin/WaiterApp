@@ -10,6 +10,7 @@ const Table = () => {
 	const [hasData, setHasData] = useState(false);
 	const tableData = useSelector((state) => getTableById(state, tableId));
 	// const navigate = useNavigate();
+	// console.log(tableData);
 
 	useEffect(() => {
 		if (tableData) {

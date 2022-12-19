@@ -4,11 +4,12 @@ import { useNavigate } from 'react-router-dom';
 import Button from '../common/Button';
 import Title from '../common/Title';
 import { updateTablesRequest } from '../../redux/tablesRedux';
+import PropTypes from 'prop-types';
 
 const TableForm = ({ tableData }) => {
 	const [status, setStatus] = useState('');
-	const [peopleAmount, setPeopleMinVal] = useState(tableData.peopleAmount);
-	const [maxPeopleAmount, setPeopleMaxVal] = useState(
+	const [peopleAmount, setPeopleAmount] = useState(tableData.peopleAmount);
+	const [maxPeopleAmount, setMaxPeopleAmount] = useState(
 		tableData.maxPeopleAmount
 	);
 	const [bill, setBillVal] = useState(tableData.bill);
@@ -17,7 +18,13 @@ const TableForm = ({ tableData }) => {
 	const id = tableData.id;
 
 	const handleChangeBill = (e) => {
-		setBillVal(e.target.value);
+		const value = e.target.value;
+
+		if (value === '') {
+			setBillVal(0);
+		} else {
+			setBillVal(parseInt(e.target.value));
+		}
 	};
 	const handleChange = (e) => {
 		setStatus(e.target.value);
@@ -25,17 +32,32 @@ const TableForm = ({ tableData }) => {
 	};
 	const handleChangeMin = (e) => {
 		const max = maxPeopleAmount;
-		parseInt(e.target.value);
-		setPeopleMinVal(e.target.value);
-		if (e.target.value > max) {
-			setPeopleMinVal(max);
+		const value = e.target.value;
+
+		if (value === '') {
+			setPeopleAmount(0);
+		} else {
+			setPeopleAmount(parseInt(value));
+			if (parseInt(value) > max) {
+				setPeopleAmount(parseInt(max));
+			}
 		}
 	};
 	const handleChangeMax = (e) => {
-		parseInt(e.target.value);
-		setPeopleMaxVal(e.target.value);
-		if (e.target.value > peopleAmount) {
-			setPeopleMinVal(parseInt(maxPeopleAmount) + 1);
+		const value = e.target.value;
+
+		if (value === '') {
+			setMaxPeopleAmount(peopleAmount);
+		} else {
+			setMaxPeopleAmount(parseInt(value));
+
+			if (
+				maxPeopleAmount > peopleAmount ||
+				maxPeopleAmount < peopleAmount ||
+				maxPeopleAmount === peopleAmount
+			) {
+				setPeopleAmount(parseInt(e.target.value));
+			}
 		}
 	};
 	const handleSubmit = (e) => {
@@ -105,7 +127,8 @@ const TableForm = ({ tableData }) => {
 					<h4>Bill: </h4>
 					<span className='fs-4 mx-4'>$</span>
 					<input
-						type='text'
+						type='number'
+						min='0'
 						value={bill}
 						className='rounded'
 						onChange={handleChangeBill}
@@ -118,5 +141,9 @@ const TableForm = ({ tableData }) => {
 		</form>
 	);
 };
+
+// TableForm.propTypes = {
+
+// }
 
 export default TableForm;
