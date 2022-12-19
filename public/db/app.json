@@ -2,9 +2,9 @@
   "tables": [
     {
       "id": "1",
-      "status": "Free",
-      "peopleAmount": 6,
-      "maxPeopleAmount": 10,
+      "status": "Reserved",
+      "peopleAmount": 9,
+      "maxPeopleAmount": 9,
       "bill": 0
     },
     {

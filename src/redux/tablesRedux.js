@@ -31,7 +31,7 @@ export const updateTablesRequest = (id, table) => {
 			body: JSON.stringify(table),
 		};
 
-		fetch('http://localhost:3131/tables/' + id, options);
+		fetch(API_URL + '/tables/' + id, options);
 	};
 };
 
