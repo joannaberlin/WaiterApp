@@ -1,4 +1,4 @@
-import { getTableById } from '../../redux/tablesRedux';
+import { getTableById, getAllTables } from '../../redux/tablesRedux';
 import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { useParams, Navigate } from 'react-router-dom';
@@ -9,8 +9,7 @@ const Table = () => {
 	const { tableId } = useParams();
 	const [hasData, setHasData] = useState(false);
 	const tableData = useSelector((state) => getTableById(state, tableId));
-	// const navigate = useNavigate();
-	// console.log(tableData);
+	const tables = useSelector((state) => getAllTables(state));
 
 	useEffect(() => {
 		if (tableData) {
@@ -21,25 +20,17 @@ const Table = () => {
 	}, [tableData]);
 
 	if (!tableData) {
+		for (let table of tables) {
+			if (table.id !== tableId) {
+				return <Navigate to='/' />;
+			}
+		}
 		return <Loading />;
 	}
 
 	if (hasData && tableData.id === tableId) {
 		return <TableForm tableData={tableData} />;
 	}
-
-	// if (!tableData && tableId) {
-	// 	return <Navigate to='/' />;
-	// }
-
-	// if (hasData) {
-	// 	if (tableData.id === tableId) {
-	// 		return <TableForm tableData={tableData} />;
-	// 	}
-	// }
-	// if (!tableData) {
-
-	// }
 };
 
 export default Table;

@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import Button from '../common/Button';
 import Title from '../common/Title';
 import { updateTablesRequest } from '../../redux/tablesRedux';
-import PropTypes from 'prop-types';
 
 const TableForm = ({ tableData }) => {
 	const [status, setStatus] = useState('');
@@ -26,9 +25,13 @@ const TableForm = ({ tableData }) => {
 			setBillVal(parseInt(e.target.value));
 		}
 	};
-	const handleChange = (e) => {
+	const handleChangeStatus = (e) => {
 		setStatus(e.target.value);
 		setBillVal(0);
+
+		if (e.target.value === 'Cleaning' || e.target.value === 'Free') {
+			setPeopleAmount(0);
+		}
 	};
 	const handleChangeMin = (e) => {
 		const max = maxPeopleAmount;
@@ -90,7 +93,7 @@ const TableForm = ({ tableData }) => {
 				<select
 					className='mx-4 rounded'
 					defaultValue={tableData.status}
-					onChange={handleChange}
+					onChange={handleChangeStatus}
 				>
 					<option value='Free'>Free</option>
 					<option value='Reserved'>Reserved</option>
@@ -141,9 +144,5 @@ const TableForm = ({ tableData }) => {
 		</form>
 	);
 };
-
-// TableForm.propTypes = {
-
-// }
 
 export default TableForm;
