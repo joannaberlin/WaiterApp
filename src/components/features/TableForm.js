@@ -6,7 +6,7 @@ import Title from '../common/Title';
 import { updateTablesRequest } from '../../redux/tablesRedux';
 
 const TableForm = ({ tableData }) => {
-	const [status, setStatus] = useState('');
+	const [status, setStatus] = useState(tableData.status);
 	const [peopleAmount, setPeopleAmount] = useState(tableData.peopleAmount);
 	const [maxPeopleAmount, setMaxPeopleAmount] = useState(
 		tableData.maxPeopleAmount
