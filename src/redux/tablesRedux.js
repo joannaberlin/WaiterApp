@@ -22,7 +22,7 @@ export const fetchTables = () => {
 	};
 };
 export const updateTablesRequest = (id, table) => {
-	return () => {
+	return (dispatch) => {
 		const options = {
 			method: 'PUT',
 			headers: {
@@ -33,7 +33,7 @@ export const updateTablesRequest = (id, table) => {
 
 		fetch(API_URL + '/tables/' + id, options)
 			.then((res) => res.json())
-			.then((table) => updateTable(table));
+			.then((table) => dispatch(updateTable(table)));
 	};
 };
 
