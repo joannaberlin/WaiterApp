@@ -26,7 +26,7 @@ const Table = () => {
 		return <Loading />;
 	}
 
-	if (hasData && tableData.id === tableId) {
+	if (hasData) {
 		return <TableForm tableData={tableData} />;
 	}
 };

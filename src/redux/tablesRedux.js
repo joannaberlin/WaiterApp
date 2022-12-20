@@ -31,7 +31,9 @@ export const updateTablesRequest = (id, table) => {
 			body: JSON.stringify(table),
 		};
 
-		fetch(API_URL + '/tables/' + id, options);
+		fetch(API_URL + '/tables/' + id, options)
+			.then((res) => res.json())
+			.then((table) => updateTable(table));
 	};
 };
 

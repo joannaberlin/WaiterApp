@@ -14,15 +14,17 @@ const TableForm = ({ tableData }) => {
 	const [bill, setBillVal] = useState(tableData.bill);
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
+
 	const id = tableData.id;
 
 	const handleChangeBill = (e) => {
-		const value = e.target.value;
+		let value = e.target.value;
 
 		if (value === '') {
-			setBillVal(0);
+			setBillVal(e.target.value);
 		} else {
-			setBillVal(parseInt(e.target.value));
+			value = parseFloat(value).toFixed(2);
+			setBillVal(Number(value));
 		}
 	};
 	const handleChangeStatus = (e) => {
@@ -132,6 +134,7 @@ const TableForm = ({ tableData }) => {
 					<input
 						type='number'
 						min='0'
+						step='0.01'
 						value={bill}
 						className='rounded'
 						onChange={handleChangeBill}
