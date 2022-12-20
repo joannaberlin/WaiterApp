@@ -21,7 +21,7 @@ export const fetchTables = () => {
 			.then((tables) => dispatch(updateTables(tables)));
 	};
 };
-export const updateTablesRequest = (id, table, tables) => {
+export const updateTablesRequest = (id, table) => {
 	return (dispatch) => {
 		const options = {
 			method: 'PUT',
@@ -31,9 +31,9 @@ export const updateTablesRequest = (id, table, tables) => {
 			body: JSON.stringify(table),
 		};
 
-		fetch(API_URL + '/tables/' + id, options)
-			.then((res) => res.json())
-			.then((tables) => dispatch(updateTables(tables)));
+		fetch(API_URL + '/tables/' + id, options).then((table) =>
+			dispatch(updateTable(table))
+		);
 	};
 };
 
