@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import Button from '../common/Button';
 import Title from '../common/Title';
 import { updateTablesRequest } from '../../redux/tablesRedux';
