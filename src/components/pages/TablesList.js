@@ -27,9 +27,12 @@ const TablesList = () => {
 								<span className='mark'>{table.status}</span>
 							</h5>
 						</div>
-						<Link key={table.id} to={'/table/' + table.id}>
-							<Button>Show more</Button>
-						</Link>
+						<div>
+							<Link key={table.id} to={'/table/' + table.id}>
+								<Button>Show more</Button>
+							</Link>
+							<Button>Delete table</Button>
+						</div>
 					</li>
 				))}
 			</ul>
