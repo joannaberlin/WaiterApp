@@ -1,13 +1,17 @@
 import { API_URL } from '../config';
 
+// selectors
 export const getAllTables = ({ tables }) => tables;
 export const getTableById = ({ tables }, tableId) =>
 	tables.find((table) => table.id === tableId);
 
+// actions
 const createActionName = (actionName) => `app/tables/${actionName}`;
 const UPDATE_TABLES = createActionName('UPDATE_TABLES');
 const UPDATE_TABLE = createActionName('UPDATE_TABLE');
+const DELETE_TABLE = createActionName('DELETE_TABLE');
 
+// action creators
 export const updateTables = (payload) => ({ type: UPDATE_TABLES, payload });
 export const updateTable = (id, payload) => ({
 	type: UPDATE_TABLE,
@@ -36,6 +40,7 @@ export const updateTablesRequest = (id, table) => {
 			.then((table) => dispatch(updateTable(id, table)));
 	};
 };
+export const deleteTable = (payload) => ({ type: DELETE_TABLE, payload });
 
 const tablesReducer = (statePart = [], action) => {
 	switch (action.type) {
@@ -45,6 +50,8 @@ const tablesReducer = (statePart = [], action) => {
 			return statePart.map((table) =>
 				table.id === action.id ? action.payload : table
 			);
+		case DELETE_TABLE:
+			return statePart.filter((table) => table.id !== action.payload);
 		default:
 			return statePart;
 	}

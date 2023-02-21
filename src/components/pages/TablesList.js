@@ -6,19 +6,21 @@ import Loading from '../common/Loading';
 
 const TablesList = () => {
 	const tables = useSelector((state) => getAllTables(state));
+
 	if (tables.length === 0) {
 		return <Loading />;
 	}
+
 	return (
-		<>
-			<h2 className='fs-1 mx-3 my-4'>All tables</h2>
+		<div className='rounded'>
+			<h2 className='fs-1 my-2 text-center text-dark'>Check your table:</h2>
 			<ul className='list-group list-group-flush'>
 				{tables.map((table) => (
 					<li
-						className='list-group-item d-flex flex-row justify-content-between'
+						className='list-group-item d-flex flex-column flex-sm-row align-items-center justify-content-sm-between px-5'
 						key={table.id}
 					>
-						<div className='d-flex flex-row'>
+						<div className='d-flex px-3 py-3 flex-column flex-sm-row align-items-center justify-content-sm-between bg-secondary rounded'>
 							<h5 className='fs-3'>Table {table.id}</h5>
 							<h5 className='mx-4 mt-2'>
 								<span>
@@ -31,12 +33,11 @@ const TablesList = () => {
 							<Link key={table.id} to={'/table/' + table.id}>
 								<Button>Show more</Button>
 							</Link>
-							<Button>Delete table</Button>
 						</div>
 					</li>
 				))}
 			</ul>
-		</>
+		</div>
 	);
 };
 

@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate, Link } from 'react-router-dom';
 import Button from '../common/Button';
 import Title from '../common/Title';
-import { updateTablesRequest } from '../../redux/tablesRedux';
+import { updateTablesRequest, deleteTable } from '../../redux/tablesRedux';
 
 const TableForm = ({ tableData }) => {
 	const [status, setStatus] = useState(tableData.status);
@@ -78,6 +78,9 @@ const TableForm = ({ tableData }) => {
 		);
 		navigate('/');
 	};
+	const handleDelete = () => {
+		dispatch(deleteTable(id));
+	};
 
 	useEffect(() => {
 		if (tableData) {
@@ -88,63 +91,71 @@ const TableForm = ({ tableData }) => {
 	}, [tableData]);
 
 	return (
-		<form onSubmit={handleSubmit}>
-			<Title id={tableData.id}>Table</Title>
-			<div className='d-flex flex-row'>
-				<h4>Status: </h4>
-				<select
-					className='mx-4 rounded'
-					defaultValue={tableData.status}
-					onChange={handleChangeStatus}
-				>
-					<option value='Free'>Free</option>
-					<option value='Reserved'>Reserved</option>
-					<option value='Busy'>Busy</option>
-					<option value='Cleaning'>Cleaning</option>
-				</select>
-			</div>
-			<div className='d-flex flex-row my-4'>
-				<h4>People: </h4>
-				<input
-					type='number'
-					min='0'
-					max='10'
-					step='1'
-					value={peopleAmount}
-					onChange={handleChangeMin}
-					className='mx-4 rounded'
-				/>
-				<span className='fs-4'>/</span>
-				<input
-					type='number'
-					min='0'
-					max='10'
-					step='1'
-					value={maxPeopleAmount}
-					onChange={handleChangeMax}
-					size='sm'
-					className='mx-4 w-2 rounded'
-				/>
-			</div>
-
-			{status === 'Busy' ? (
+		<>
+			<form onSubmit={handleSubmit}>
+				<Title id={tableData.id}>Table</Title>
 				<div className='d-flex flex-row'>
-					<h4>Bill: </h4>
-					<span className='fs-4 mx-4'>$</span>
+					<h4>Status: </h4>
+					<select
+						className='mx-4 rounded'
+						defaultValue={tableData.status}
+						onChange={handleChangeStatus}
+					>
+						<option value='Free'>Free</option>
+						<option value='Reserved'>Reserved</option>
+						<option value='Busy'>Busy</option>
+						<option value='Cleaning'>Cleaning</option>
+					</select>
+				</div>
+				<div className='d-flex flex-row my-4'>
+					<h4>People: </h4>
 					<input
 						type='number'
 						min='0'
-						step='0.01'
-						value={bill}
-						className='rounded'
-						onChange={handleChangeBill}
+						max='10'
+						step='1'
+						value={peopleAmount}
+						onChange={handleChangeMin}
+						className='mx-4 rounded'
+					/>
+					<span className='fs-4'>/</span>
+					<input
+						type='number'
+						min='0'
+						max='10'
+						step='1'
+						value={maxPeopleAmount}
+						onChange={handleChangeMax}
+						size='sm'
+						className='mx-4 w-2 rounded'
 					/>
 				</div>
-			) : (
-				<></>
-			)}
-			<Button>Update</Button>
-		</form>
+
+				{status === 'Busy' ? (
+					<div className='d-flex flex-row'>
+						<h4>Bill: </h4>
+						<span className='fs-4 mx-4'>$</span>
+						<input
+							type='number'
+							min='0'
+							step='0.01'
+							value={bill}
+							className='rounded'
+							onChange={handleChangeBill}
+						/>
+					</div>
+				) : (
+					<></>
+				)}
+				<Button>Update</Button>
+			</form>
+			<Link to='/'>
+				<Button>Go back</Button>
+			</Link>
+			<button className='btn btn-info my-2 mx-2' onClick={handleDelete}>
+				Delete
+			</button>
+		</>
 	);
 };
 
