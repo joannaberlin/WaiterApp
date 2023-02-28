@@ -9,8 +9,8 @@
     },
     {
       "id": "2",
-      "status": "Reserved",
-      "peopleAmount": 5,
+      "status": "Free",
+      "peopleAmount": 0,
       "maxPeopleAmount": 7,
       "bill": 0
     },
