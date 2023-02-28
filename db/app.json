@@ -3,15 +3,15 @@
     {
       "id": "1",
       "status": "Reserved",
-      "peopleAmount": 10,
-      "maxPeopleAmount": 10,
+      "peopleAmount": 1,
+      "maxPeopleAmount": 9,
       "bill": 0
     },
     {
       "id": "2",
-      "status": "Free",
-      "peopleAmount": 0,
-      "maxPeopleAmount": 6,
+      "status": "Reserved",
+      "peopleAmount": 5,
+      "maxPeopleAmount": 7,
       "bill": 0
     },
     {
@@ -26,14 +26,14 @@
       "status": "Busy",
       "peopleAmount": 2,
       "maxPeopleAmount": 3,
-      "bill": 0.9
+      "bill": 20
     },
     {
       "id": "5",
-      "status": "Free",
-      "peopleAmount": 0,
-      "maxPeopleAmount": 3,
-      "bill": 0
+      "status": "Busy",
+      "peopleAmount": 6,
+      "maxPeopleAmount": 6,
+      "bill": 20
     }
   ]
 }
