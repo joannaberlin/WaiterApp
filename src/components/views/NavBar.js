@@ -3,7 +3,7 @@ import Nav from 'react-bootstrap/Nav';
 
 const NavBar = () => {
 	return (
-		<Nav className='navbar navbar-dark bg-secondary bg-gradient rounded'>
+		<Nav className='navbar navbar-dark bg-secondary rounded'>
 			<Nav.Link className='text-white' as={NavLink} to='/'>
 				Waiter.app
 			</Nav.Link>

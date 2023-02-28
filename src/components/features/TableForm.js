@@ -152,7 +152,7 @@ const TableForm = ({ tableData }) => {
 			<Link to='/'>
 				<Button>Go back</Button>
 			</Link>
-			<button className='btn btn-dark my-2 mx-2' onClick={handleDelete}>
+			<button className='btn btn-info my-2 mx-2' onClick={handleDelete}>
 				Delete
 			</button>
 		</>
