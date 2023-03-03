@@ -5,6 +5,7 @@ const About = () => {
 				Waiter.app is here to make waiters' lives easier by helping them to
 				manage tables during their shift.
 			</p>
+			<p>The app is still being developed.</p>
 		</div>
 	);
 };
