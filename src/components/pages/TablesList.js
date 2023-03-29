@@ -20,7 +20,7 @@ const TablesList = () => {
 						className='list-group-item d-flex flex-column flex-sm-row align-items-center justify-content-sm-between px-5 bg-transparent'
 						key={table.id}
 					>
-						<div className='d-flex px-3 py-3 flex-column flex-sm-row align-items-center justify-content-sm-between bg-secondary bg-gradient rounded'>
+						<div className='d-flex px-3 py-3 flex-column flex-sm-row align-items-center justify-content-sm-between bg-light bg-gradient card border-warning rounded'>
 							<h5 className='fs-3'>Table {table.id}</h5>
 							<h5 className='mx-4 mt-2'>
 								<span>
