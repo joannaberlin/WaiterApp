@@ -23,7 +23,8 @@
     This web application is to help managing tables in a restaurant.
     <br />
 Tech stack: React.js, Redux, JSON server, REST API
-    $~$
+<br />
+<br />
   <a href="https://github.com/github_username/repo_name">
     <img src="public/screenshot.png" alt="Web application interface screenshot">
   </a>
