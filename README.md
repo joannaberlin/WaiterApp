@@ -19,7 +19,9 @@
 
 ## About The Project
 
-This web application is to help managing tables in a restaurant.
+<p align="center">
+    This web application is to help managing tables in a restaurant.
+    <br />
 Tech stack: React.js, Redux, JSON server, REST API
 
   <a href="https://github.com/github_username/repo_name">
