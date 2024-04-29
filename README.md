@@ -19,6 +19,9 @@
 
 ## About The Project
 
+This web application is to help managing tables in a restaurant.
+Tech stack: React.js, Redux, JSON server, REST API
+
   <a href="https://github.com/github_username/repo_name">
     <img src="public/screenshot.png" alt="Web application interface screenshot">
   </a>
