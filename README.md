@@ -53,7 +53,7 @@ To start the project locally:
 
 1. Clone the repo
    ```sh
-   git clone https://github.com/github_username/repo_name.git
+   git clone https://github.com/joannaberlin/WaiterApp.git
    ```
 2. Install NPM packages
    ```sh
