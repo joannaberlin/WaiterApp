@@ -5,7 +5,7 @@ const NavBar = () => {
 	return (
 		<Nav className='navbar navbar-dark bg-dark bg-gradient rounded'>
 			<Nav.Link className='text-white' as={NavLink} to='/'>
-				Waiter.app
+				Round The Table
 			</Nav.Link>
 			<div className='d-flex'>
 				<Nav.Link className='text-white' as={NavLink} to='/'>
