@@ -10,14 +10,9 @@ const TablesList = () => {
 	const tables = useSelector((state) => getAllTables(state));
 	const dispatch = useDispatch();
 
-	if (tables.length === 0) {
-		return <Loading />;
-	}
-
 	const handleAdd = () => {
 		console.log('dupa');
 		const id = Math.floor(Math.random() * 100).toString();
-		console.log(id);
 		dispatch(
 			updateTablesApi({
 				id: id,
@@ -29,6 +24,10 @@ const TablesList = () => {
 		);
 		console.log(tables);
 	};
+
+	if (tables.length === 0) {
+		return <Loading />;
+	}
 
 	return (
 		<div className='rounded text-center'>

@@ -57,9 +57,12 @@ export const updateTablesApi = (table) => {
 
 		fetch(API_URL + '/tables', options)
 			.then((res) => res.json())
-			.then((table) => {
-				console.log('table', table);
-				dispatch(addTable(table));
+			.then((newTable) => {
+				console.log('new table', newTable);
+				dispatch(addTable(newTable));
+			})
+			.catch((error) => {
+				console.log('Error adding new table:', error);
 			});
 	};
 };
@@ -77,7 +80,7 @@ const tablesReducer = (statePart = [], action) => {
 		case DELETE_TABLE:
 			return statePart.filter((table) => table.id !== action.payload);
 		case ADD_TABLE:
-			return [...statePart].push(action.payload);
+			return [...statePart, action.payload];
 		default:
 			return statePart;
 	}
