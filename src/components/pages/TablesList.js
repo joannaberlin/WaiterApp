@@ -1,18 +1,37 @@
 import { useSelector } from 'react-redux';
 import { getAllTables } from '../../redux/tablesRedux';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { updateTablesApi } from '../../redux/tablesRedux';
 import Button from '../common/Button';
 import Loading from '../common/Loading';
 
 const TablesList = () => {
 	const tables = useSelector((state) => getAllTables(state));
+	const dispatch = useDispatch();
 
 	if (tables.length === 0) {
 		return <Loading />;
 	}
 
+	const handleAdd = () => {
+		console.log('dupa');
+		const id = Math.floor(Math.random() * 100).toString();
+		console.log(id);
+		dispatch(
+			updateTablesApi({
+				id: id,
+				status: 'Free',
+				peopleAmount: 0,
+				maxPeopleAmount: 10,
+				bill: 0,
+			})
+		);
+		console.log(tables);
+	};
+
 	return (
-		<div className='rounded'>
+		<div className='rounded text-center'>
 			<h2 className='fs-1 my-2 text-center text-dark'>Check your table:</h2>
 			<ul className='list-group list-group-flush'>
 				{tables.map((table) => (
@@ -37,6 +56,7 @@ const TablesList = () => {
 					</li>
 				))}
 			</ul>
+			<Button handleClick={handleAdd}>Add table</Button>
 		</div>
 	);
 };
